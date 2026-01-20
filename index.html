@@ -6,25 +6,30 @@
     <title>El Shuk de Mauro - Productos Kosher</title>
     <style>
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif; /* Fuente limpia como Helueni */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9; /* Fondo claro */
+            background-color: #f9f9f9;
             color: #333;
             line-height: 1.6;
         }
         header {
-            background: linear-gradient(to right, #4caf50, #388e3c); /* Verde natural */
+            background: linear-gradient(to right, #4caf50, #388e3c);
             color: white;
-            padding: 50px 20px;
+            padding: 60px 20px;
             text-align: center;
-            background-image: url('https://via.placeholder.com/1200x400?text=Productos+Kosher+Frescos'); /* Hero image placeholder */
+            background-image: url('https://via.placeholder.com/1200x400?text=Bienvenidos+a+El+Shuk+de+Mauro');
             background-size: cover;
             background-position: center;
+            background-blend-mode: overlay;
         }
         header h1 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            margin: 10px 0;
         }
         nav {
             margin-top: 20px;
@@ -145,10 +150,12 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="inicio">
+        <img src="logo.png" alt="Logo El Shuk de Mauro" style="max-width: 120px; margin-bottom: 20px;">
         <h1>El Shuk de Mauro</h1>
-        <p>Productos Kosher frescos y naturales para tu bienestar</p>
+        <p>Productos Kosher frescos y tradicionales</p>
         <nav>
+            <a href="#inicio">Inicio</a>
             <a href="#sobre">Sobre nosotros</a>
             <a href="#productos">Productos</a>
             <a href="#contacto">Contacto</a>
@@ -166,30 +173,30 @@
 
     <section id="sobre">
         <h2>Sobre nosotros</h2>
-        <p>En El Shuk de Mauro, nos dedicamos a ofrecer productos Kosher frescos y de alta calidad, respetando las tradiciones y normas kosher. Nuestro compromiso es brindar alimentos saludables y deliciosos para toda la comunidad, inspirados en la pureza de la naturaleza.</p>
+        <p>En El Shuk de Mauro, nos dedicamos a ofrecer productos Kosher de alta calidad, respetando las tradiciones ancestrales. Nuestra misión es proporcionar alimentos frescos, naturales y certificados Kosher, promoviendo un estilo de vida saludable y conectado con la naturaleza.</p>
     </section>
 
     <section id="productos">
         <h2>Productos</h2>
         <div class="productos">
             <div class="producto">
-                <img src="https://via.placeholder.com/300x200?text=Vino+Kosher+Natural" alt="Vino Kosher">
+                <img src="https://via.placeholder.com/300x200?text=Vino+Kosher" alt="Vino Kosher">
                 <h3>Vino Kosher</h3>
-                <p>Selección de vinos certificados Kosher, perfectos para ocasiones especiales. Hecho con uvas naturales.</p>
+                <p>Vino certificado Kosher, elaborado con uvas seleccionadas para ocasiones especiales.</p>
                 <p>Precio: $15.99</p>
                 <button onclick="agregarAlCarrito('Vino Kosher', 15.99)">Agregar al Carrito</button>
             </div>
             <div class="producto">
-                <img src="https://via.placeholder.com/300x200?text=Pan+de+Matza+Fresco" alt="Pan de Matzá">
+                <img src="https://via.placeholder.com/300x200?text=Pan+de+Matza" alt="Pan de Matzá">
                 <h3>Pan de Matzá</h3>
-                <p>Pan tradicional Kosher, ideal para la Pascua y comidas diarias. Ingredientes 100% naturales.</p>
+                <p>Pan tradicional Kosher, perfecto para la Pascua y comidas diarias.</p>
                 <p>Precio: $5.99</p>
                 <button onclick="agregarAlCarrito('Pan de Matzá', 5.99)">Agregar al Carrito</button>
             </div>
             <div class="producto">
                 <img src="https://via.placeholder.com/300x200?text=Aceite+de+Oliva+Kosher" alt="Aceite de Oliva Kosher">
                 <h3>Aceite de Oliva Kosher</h3>
-                <p>Aceite puro y natural, certificado Kosher para tus recetas. Extraído de olivas frescas.</p>
+                <p>Aceite puro extraído de olivas frescas, certificado Kosher.</p>
                 <p>Precio: $12.99</p>
                 <button onclick="agregarAlCarrito('Aceite de Oliva Kosher', 12.99)">Agregar al Carrito</button>
             </div>
@@ -206,7 +213,7 @@
         </form>
         <p>Dirección: [Tu dirección aquí] | Teléfono: [Tu teléfono aquí]</p>
         <h3>Nuestra Ubicación</h3>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.419415484681!3d37.774929779759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b5b3b3b3%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1633020000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.419415484681!3d37.774929779759!2m3!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b5b3b3b3%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1633020000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
     </section>
 
     <section id="redes">
