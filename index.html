@@ -6,55 +6,65 @@
     <title>El Shuk de Mauro - Productos Kosher</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif; /* Fuente limpia como Helueni */
             margin: 0;
             padding: 0;
-            background-color: #f0f8ff; /* Azul claro para fondo */
+            background-color: #f9f9f9; /* Fondo claro */
             color: #333;
+            line-height: 1.6;
         }
         header {
-            background: linear-gradient(to right, #007bff, #0056b3); /* Gradiente azul */
+            background: linear-gradient(to right, #4caf50, #388e3c); /* Verde natural */
             color: white;
-            padding: 20px;
+            padding: 50px 20px;
             text-align: center;
+            background-image: url('https://via.placeholder.com/1200x400?text=Productos+Kosher+Frescos'); /* Hero image placeholder */
+            background-size: cover;
+            background-position: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
         }
         nav {
-            margin-top: 10px;
+            margin-top: 20px;
         }
         nav a {
             color: white;
-            margin: 0 15px;
+            margin: 0 20px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
+            font-size: 1.1em;
         }
         nav a:hover {
             text-decoration: underline;
         }
         section {
-            padding: 40px;
+            padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .productos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         .producto {
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 20px;
-            margin: 10px;
-            width: 250px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .producto:hover {
+            transform: translateY(-5px);
         }
         .producto img {
-            max-width: 100%;
-            height: 150px;
+            width: 100%;
+            height: 200px;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 8px;
         }
         .carrito {
             position: fixed;
@@ -62,13 +72,15 @@
             right: 20px;
             background: white;
             border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 250px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 280px;
+            z-index: 1000;
         }
         .carrito h3 {
             margin-top: 0;
+            color: #4caf50;
         }
         .carrito ul {
             list-style: none;
@@ -77,40 +89,48 @@
         .carrito li {
             display: flex;
             justify-content: space-between;
-            margin: 5px 0;
+            margin: 8px 0;
         }
         form {
             max-width: 600px;
             margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         input, textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
+            font-size: 1em;
         }
         button {
-            background-color: #007bff;
+            background-color: #4caf50;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #388e3c;
         }
         footer {
-            background: linear-gradient(to right, #007bff, #0056b3);
+            background: #4caf50;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
         }
         .redes a {
-            margin: 0 10px;
+            margin: 0 15px;
             color: white;
             text-decoration: none;
+            font-size: 1.2em;
         }
         .redes a:hover {
             text-decoration: underline;
@@ -119,15 +139,15 @@
             width: 100%;
             height: 300px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Logo El Shuk de Mauro" style="max-width: 150px;"> <!-- Reemplaza con tu logo real -->
         <h1>El Shuk de Mauro</h1>
-        <p>Productos Kosher de calidad</p>
+        <p>Productos Kosher frescos y naturales para tu bienestar</p>
         <nav>
             <a href="#sobre">Sobre nosotros</a>
             <a href="#productos">Productos</a>
@@ -146,40 +166,39 @@
 
     <section id="sobre">
         <h2>Sobre nosotros</h2>
-        <p>En El Shuk de Mauro, nos dedicamos a ofrecer productos Kosher frescos y de alta calidad, respetando las tradiciones y normas kosher. Nuestro compromiso es brindar alimentos saludables y deliciosos para toda la comunidad.</p>
+        <p>En El Shuk de Mauro, nos dedicamos a ofrecer productos Kosher frescos y de alta calidad, respetando las tradiciones y normas kosher. Nuestro compromiso es brindar alimentos saludables y deliciosos para toda la comunidad, inspirados en la pureza de la naturaleza.</p>
     </section>
 
     <section id="productos">
         <h2>Productos</h2>
         <div class="productos">
             <div class="producto">
-                <img src="https://via.placeholder.com/250x150?text=Vino+Kosher" alt="Vino Kosher"> <!-- Reemplaza con imagen real -->
+                <img src="https://via.placeholder.com/300x200?text=Vino+Kosher+Natural" alt="Vino Kosher">
                 <h3>Vino Kosher</h3>
-                <p>Selección de vinos certificados Kosher, perfectos para ocasiones especiales.</p>
+                <p>Selección de vinos certificados Kosher, perfectos para ocasiones especiales. Hecho con uvas naturales.</p>
                 <p>Precio: $15.99</p>
                 <button onclick="agregarAlCarrito('Vino Kosher', 15.99)">Agregar al Carrito</button>
             </div>
             <div class="producto">
-                <img src="https://via.placeholder.com/250x150?text=Pan+de+Matza" alt="Pan de Matzá"> <!-- Reemplaza con imagen real -->
+                <img src="https://via.placeholder.com/300x200?text=Pan+de+Matza+Fresco" alt="Pan de Matzá">
                 <h3>Pan de Matzá</h3>
-                <p>Pan tradicional Kosher, ideal para la Pascua y comidas diarias.</p>
+                <p>Pan tradicional Kosher, ideal para la Pascua y comidas diarias. Ingredientes 100% naturales.</p>
                 <p>Precio: $5.99</p>
                 <button onclick="agregarAlCarrito('Pan de Matzá', 5.99)">Agregar al Carrito</button>
             </div>
             <div class="producto">
-                <img src="https://via.placeholder.com/250x150?text=Aceite+de+Oliva" alt="Aceite de Oliva Kosher"> <!-- Reemplaza con imagen real -->
+                <img src="https://via.placeholder.com/300x200?text=Aceite+de+Oliva+Kosher" alt="Aceite de Oliva Kosher">
                 <h3>Aceite de Oliva Kosher</h3>
-                <p>Aceite puro y natural, certificado Kosher para tus recetas.</p>
+                <p>Aceite puro y natural, certificado Kosher para tus recetas. Extraído de olivas frescas.</p>
                 <p>Precio: $12.99</p>
                 <button onclick="agregarAlCarrito('Aceite de Oliva Kosher', 12.99)">Agregar al Carrito</button>
             </div>
-            <!-- Agrega más productos aquí si quieres -->
         </div>
     </section>
 
     <section id="contacto">
         <h2>Contacto</h2>
-        <form action="#" method="post"> <!-- Cambia el action a tu backend si tienes -->
+        <form action="#" method="post">
             <input type="text" name="nombre" placeholder="Tu nombre" required>
             <input type="email" name="email" placeholder="Tu email" required>
             <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
@@ -187,4 +206,54 @@
         </form>
         <p>Dirección: [Tu dirección aquí] | Teléfono: [Tu teléfono aquí]</p>
         <h3>Nuestra Ubicación</h3>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.419415484681!3d37.774929779759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b5b3b3b3%3A0x4a501367f076
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.419415484681!3d37.774929779759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b5b3b3b3%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1633020000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <section id="redes">
+        <h2>Redes sociales</h2>
+        <p>Síguenos en:</p>
+        <div class="redes">
+            <a href="https://facebook.com/tu-pagina">Facebook</a>
+            <a href="https://instagram.com/tu-cuenta">Instagram</a>
+            <a href="https://twitter.com/tu-cuenta">Twitter</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 El Shuk de Mauro. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        let carrito = [];
+        let total = 0;
+
+        function agregarAlCarrito(producto, precio) {
+            carrito.push({ nombre: producto, precio: precio });
+            total += precio;
+            actualizarCarrito();
+        }
+
+        function vaciarCarrito() {
+            carrito = [];
+            total = 0;
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const lista = document.getElementById('carrito-lista');
+            lista.innerHTML = '';
+            carrito.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.nombre} - $${item.precio}`;
+                lista.appendChild(li);
+            });
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensaje enviado. ¡Gracias por contactarnos!');
+        });
+    </script>
+</body>
+</html>
