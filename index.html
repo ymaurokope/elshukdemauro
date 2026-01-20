@@ -9,8 +9,8 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff; /* Blanco puro */
-            color: #333;
+            background-color: #ffffff; /* Blanco */
+            color: #333; /* Negro para texto */
             line-height: 1.6;
         }
         header {
@@ -57,11 +57,11 @@
         }
         .producto {
             background: #ffffff; /* Blanco */
-            border: 1px solid #e0e0e0;
+            border: 1px solid #e0f0ff; /* Azul claro */
             border-radius: 12px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,123,255,0.1); /* Sombra azul sutil */
             transition: transform 0.3s;
         }
         .producto:hover {
@@ -78,10 +78,10 @@
             top: 20px;
             right: 20px;
             background: #ffffff; /* Blanco */
-            border: 1px solid #ddd;
+            border: 1px solid #e0f0ff; /* Azul claro */
             padding: 15px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,123,255,0.1); /* Sombra azul */
             width: 280px;
             z-index: 1000;
         }
@@ -104,13 +104,13 @@
             background: #ffffff; /* Blanco */
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,123,255,0.1); /* Sombra azul */
         }
         input, textarea {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            border: 1px solid #ccc;
+            border: 1px solid #e0f0ff; /* Azul claro */
             border-radius: 8px;
             font-size: 1em;
         }
@@ -253,3 +253,16 @@
             lista.innerHTML = '';
             carrito.forEach(item => {
                 const li = document.createElement('li');
+                li.textContent = `${item.nombre} - $${item.precio}`;
+                lista.appendChild(li);
+            });
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensaje enviado. ¡Gracias por contactarnos!');
+        });
+    </script>
+</body>
+</html>
