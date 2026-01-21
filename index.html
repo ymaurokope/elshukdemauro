@@ -94,6 +94,21 @@
             justify-content: space-between;
             margin: 8px 0;
         }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff; /* Blanco */
+            padding: 30px;
+            border-radius: 12px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #000080; /* Azul navy */
+            border-radius: 8px;
+            font-size: 1em;
+        }
         button {
             background-color: #000080; /* Azul navy */
             color: white;
@@ -112,6 +127,22 @@
             text-align: center;
             padding: 30px 20px;
         }
+        .redes a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        .redes a:hover {
+            text-decoration: underline;
+        }
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -119,9 +150,12 @@
         <img src="logo.png" alt="Logo El Shuk de Mauro" style="max-width: 120px; margin-bottom: 20px;">
         <h1>El Shuk de Mauro</h1>
         <p>Productos Kosher frescos y tradicionales</p>
-        <nav id="nav-dinamico">
+        <nav>
             <a href="#inicio" onclick="scrollToSection('inicio')">Inicio</a>
-            <!-- Los enlaces a secciones de productos se agregan dinámicamente -->
+            <a href="#sobre" onclick="scrollToSection('sobre')">Sobre nosotros</a>
+            <a href="#productos" onclick="scrollToSection('productos')">Productos</a>
+            <a href="#contacto" onclick="scrollToSection('contacto')">Contacto</a>
+            <a href="#redes" onclick="scrollToSection('redes')">Redes sociales</a>
         </nav>
     </header>
 
@@ -133,8 +167,38 @@
         <button onclick="vaciarCarrito()">Vaciar Carrito</button>
     </div>
 
-    <!-- Las secciones de productos se crean dinámicamente aquí -->
-    <div id="secciones-dinamicas"></div>
+    <section id="sobre">
+        <h2>Sobre nosotros</h2>
+        <p id="sobre-texto">Cargando...</p>
+    </section>
+
+    <section id="productos">
+        <h2>Productos</h2>
+        <div class="productos" id="productos-lista">
+            <!-- Los productos se cargan dinámicamente -->
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <form action="https://formspree.io/f/xxxxxxxx" method="POST"> <!-- Reemplaza con tu endpoint de Formspree -->
+            <input type="text" name="nombre" placeholder="Tu nombre" required>
+            <input type="email" name="email" placeholder="Tu email" required>
+            <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="contacto-info">Cargando...</p>
+        <h3>Nuestra Ubicación</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.419415484681!3d37.774929779759!2m3!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b5b3b3b3%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1633020000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <section id="redes">
+        <h2>Redes sociales</h2>
+        <p>Síguenos en:</p>
+        <div class="redes" id="redes-lista">
+            <!-- Los enlaces se cargan dinámicamente -->
+        </div>
+    </section>
 
     <footer>
         <p>&copy; 2023 El Shuk de Mauro. Todos los derechos reservados.</p>
@@ -176,56 +240,61 @@
             }
         }
 
-        // Cargar todas las hojas desde Google Sheets como secciones de productos
+        // Cargar contenido desde Google Sheets
         const SPREADSHEET_ID = '12ExA7NgqPKauNdTAQpmSzV9AjzfKPbTeIoaFPN2gDwg';
-        const API_KEY = '0a05c2cbcb44e8efaad71f59d2a0403d8c48bb7f'; // Tu API key real
+        const API_KEY = '0a05c2cbcb44e8efaad71f59d2a0403d8c48bb7f';
 
-        // Obtener lista de hojas
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}?key=${API_KEY}`)
+        // Cargar "Sobre nosotros"
+        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Sobre%20nosotros!A:A?key=${API_KEY}`)
             .then(response => response.json())
             .then(data => {
-                const sheets = data.sheets.map(sheet => sheet.properties.title);
-                const navDinamico = document.getElementById('nav-dinamico');
-                const seccionesDinamicas = document.getElementById('secciones-dinamicas');
+                document.getElementById('sobre-texto').textContent = data.values ? data.values.slice(1).map(row => row[0]).join(' ') : 'Texto por defecto';
+            })
+            .catch(error => console.error('Error cargando Sobre nosotros:', error));
 
-                sheets.forEach(sheetName => {
-                    // Agregar enlace al nav
-                    const navLink = document.createElement('a');
-                    navLink.href = `#${sheetName.toLowerCase().replace(/\s+/g, '-')}`;
-                    navLink.textContent = sheetName;
-                    navLink.onclick = () => scrollToSection(sheetName.toLowerCase().replace(/\s+/g, '-'));
-                    navDinamico.appendChild(navLink);
-
-                    // Crear sección de productos
-                    const section = document.createElement('section');
-                    section.id = sheetName.toLowerCase().replace(/\s+/g, '-');
-                    section.innerHTML = `<h2>${sheetName}</h2><div class="productos" id="productos-${sheetName.toLowerCase().replace(/\s+/g, '-')}"></div>`;
-                    seccionesDinamicas.appendChild(section);
-
-                    // Cargar productos de la hoja
-                    const range = `${sheetName}!A:D`; // Asumiendo columnas: Nombre, Descripción, Precio, Imagen URL
-                    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`)
-                        .then(response => response.json())
-                        .then(sheetData => {
-                            const productosDiv = document.getElementById(`productos-${sheetName.toLowerCase().replace(/\s+/g, '-')}`);
-                            sheetData.values.slice(1).forEach(row => { // Saltar header
-                                const [nombre, descripcion, precio, imagen] = row;
-                                const productoDiv = document.createElement('div');
-                                productoDiv.className = 'producto';
-                                productoDiv.innerHTML = `
-                                    <img src="${imagen || 'https://via.placeholder.com/300x200?text=Producto'}" alt="${nombre}">
-                                    <h3>${nombre}</h3>
-                                    <p>${descripcion}</p>
-                                    <p>Precio: $${precio}</p>
-                                    <button onclick="agregarAlCarrito('${nombre}', ${precio})">Agregar al Carrito</button>
-                                `;
-                                productosDiv.appendChild(productoDiv);
-                            });
-                        })
-                        .catch(error => console.error(`Error cargando productos de ${sheetName}:`, error));
+        // Cargar "Productos"
+        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Productos!A:D?key=${API_KEY}`)
+            .then(response => response.json())
+            .then(data => {
+                const productosLista = document.getElementById('productos-lista');
+                data.values.slice(1).forEach(row => {
+                    const [nombre, descripcion, precio, imagen] = row;
+                    const productoDiv = document.createElement('div');
+                    productoDiv.className = 'producto';
+                    productoDiv.innerHTML = `
+                        <img src="${imagen || 'https://via.placeholder.com/300x200?text=Producto'}" alt="${nombre}">
+                        <h3>${nombre}</h3>
+                        <p>${descripcion}</p>
+                        <p>Precio: $${precio}</p>
+                        <button onclick="agregarAlCarrito('${nombre}', ${precio})">Agregar al Carrito</button>
+                    `;
+                    productosLista.appendChild(productoDiv);
                 });
             })
-            .catch(error => console.error('Error obteniendo hojas:', error));
+            .catch(error => console.error('Error cargando Productos:', error));
+
+        // Cargar "Contacto"
+        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Contacto!A:A?key=${API_KEY}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('contacto-info').textContent = data.values ? data.values.slice(1).map(row => row[0]).join(' ') : 'Dirección: [Tu dirección aquí] | Teléfono: [Tu teléfono aquí]';
+            })
+            .catch(error => console.error('Error cargando Contacto:', error));
+
+        // Cargar "Redes sociales"
+        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Redes%20sociales!A:B?key=${API_KEY}`)
+            .then(response => response.json())
+            .then(data => {
+                const redesLista = document.getElementById('redes-lista');
+                data.values.slice(1).forEach(row => {
+                    const [plataforma, url] = row;
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.textContent = plataforma;
+                    redesLista.appendChild(a);
+                });
+            })
+            .catch(error => console.error('Error cargando Redes sociales:', error));
     </script>
 </body>
 </html>
