@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Shuk de Mauro - Productos Kosher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #ffffff; /* Blanco */
@@ -14,67 +15,89 @@
             line-height: 1.6;
         }
         header {
-            background: linear-gradient(rgba(0,0,128,0.7), rgba(0,0,128,0.7)), url('https://via.placeholder.com/1920x1080?text=Productos+Kosher+Frescos'); /* Hero con imagen de fondo */
+            background: linear-gradient(rgba(0,0,128,0.6), rgba(0,0,128,0.6)), url('https://via.placeholder.com/1920x1080?text=Productos+Kosher+Frescos+y+Naturales'); /* Hero con imagen de fondo */
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 20px;
+            padding: 120px 20px;
             text-align: center;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            box-shadow: inset 0 0 100px rgba(0,0,128,0.3);
         }
         header h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             margin: 0;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         header p {
             font-size: 1.5em;
             margin: 20px 0;
+            font-weight: 300;
         }
         nav {
             margin-top: 40px;
         }
         nav a {
             color: white;
-            margin: 0 20px;
+            margin: 0 25px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 400;
             font-size: 1.1em;
             cursor: pointer;
+            transition: color 0.3s;
         }
         nav a:hover {
-            text-decoration: underline;
+            color: #e0e0ff;
         }
         section {
-            padding: 80px 20px;
+            padding: 100px 20px;
             max-width: 1200px;
             margin: 0 auto;
             background-color: #ffffff; /* Blanco */
         }
+        section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #000080; /* Azul navy */
+        }
         .productos {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            gap: 50px;
         }
         .producto {
             background: #ffffff; /* Blanco */
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
+            border: 1px solid #e0e0ff;
+            border-radius: 20px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,128,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .producto:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,128,0.2);
         }
         .producto img {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .producto h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #000080;
+        }
+        .producto p {
+            font-size: 1em;
+            margin: 10px 0;
         }
         .carrito {
             position: fixed;
@@ -82,14 +105,16 @@
             right: 20px;
             background: #ffffff; /* Blanco */
             border: 1px solid #000000; /* Negro */
-            padding: 15px;
-            border-radius: 12px;
-            width: 280px;
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
             z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         .carrito h3 {
             margin-top: 0;
-            color: #000000; /* Negro */
+            color: #000080; /* Azul navy */
+            font-size: 1.2em;
         }
         .carrito ul {
             list-style: none;
@@ -98,54 +123,61 @@
         .carrito li {
             display: flex;
             justify-content: space-between;
-            margin: 8px 0;
+            margin: 10px 0;
+            font-size: 0.9em;
         }
         form {
             max-width: 600px;
             margin: 0 auto;
             background: #ffffff; /* Blanco */
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,128,0.1);
         }
         input, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             margin: 10px 0;
-            border: 1px solid #000080; /* Azul navy */
-            border-radius: 8px;
+            border: 1px solid #e0e0ff;
+            border-radius: 10px;
             font-size: 1em;
+            font-family: 'Poppins', sans-serif;
         }
         button {
             background-color: #000080; /* Azul navy */
             color: white;
-            padding: 12px 24px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 1em;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
         }
         button:hover {
             background-color: #0000ff; /* Azul más claro */
+            transform: scale(1.05);
         }
         footer {
             background-color: #000080; /* Azul navy */
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
         .redes {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
+            margin-bottom: 20px;
         }
         .redes a {
             color: white;
             text-decoration: none;
-            font-size: 1.2em;
+            font-size: 1.5em;
+            transition: color 0.3s;
         }
         .redes a:hover {
-            text-decoration: underline;
+            color: #e0e0ff;
         }
     </style>
 </head>
@@ -247,7 +279,7 @@
                     const productoDiv = document.createElement('div');
                     productoDiv.className = 'producto';
                     productoDiv.innerHTML = `
-                        <img src="${imagen || 'https://via.placeholder.com/350x250?text=Producto'}" alt="${nombre}">
+                        <img src="${imagen || 'https://via.placeholder.com/350x250?text=Producto+Lindo'}" alt="${nombre}">
                         <h3>${nombre}</h3>
                         <p>${descripcion}</p>
                         <p>Precio: $${precio}</p>
