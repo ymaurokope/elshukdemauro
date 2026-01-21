@@ -14,25 +14,27 @@
             line-height: 1.6;
         }
         header {
-            background-color: #000080; /* Azul navy */
+            background: linear-gradient(rgba(0,0,128,0.7), rgba(0,0,128,0.7)), url('https://via.placeholder.com/1920x1080?text=Productos+Kosher+Frescos'); /* Hero con imagen de fondo */
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 60px 20px;
+            padding: 100px 20px;
             text-align: center;
-            min-height: 100vh; /* Pantalla completa */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         header h1 {
-            font-size: 2.8em;
+            font-size: 3em;
             margin: 0;
         }
         header p {
-            font-size: 1.2em;
-            margin: 10px 0;
+            font-size: 1.5em;
+            margin: 20px 0;
         }
         nav {
-            margin-top: 20px;
+            margin-top: 40px;
         }
         nav a {
             color: white;
@@ -46,27 +48,31 @@
             text-decoration: underline;
         }
         section {
-            padding: 60px 20px;
+            padding: 80px 20px;
             max-width: 1200px;
             margin: 0 auto;
             background-color: #ffffff; /* Blanco */
-            display: none; /* Ocultas inicialmente */
         }
         .productos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
         }
         .producto {
             background: #ffffff; /* Blanco */
-            border: 1px solid #000080; /* Azul navy */
+            border: 1px solid #e0e0e0;
             border-radius: 12px;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .producto:hover {
+            transform: translateY(-10px);
         }
         .producto img {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
             border-radius: 8px;
         }
@@ -98,8 +104,9 @@
             max-width: 600px;
             margin: 0 auto;
             background: #ffffff; /* Blanco */
-            padding: 30px;
+            padding: 40px;
             border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         input, textarea {
             width: 100%;
@@ -125,10 +132,14 @@
             background-color: #000080; /* Azul navy */
             color: white;
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
+        }
+        .redes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         .redes a {
-            margin: 0 15px;
             color: white;
             text-decoration: none;
             font-size: 1.2em;
@@ -136,26 +147,17 @@
         .redes a:hover {
             text-decoration: underline;
         }
-        iframe {
-            width: 100%;
-            height: 300px;
-            border: none;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
     <header id="inicio">
-        <img src="logo.png" alt="Logo El Shuk de Mauro" style="max-width: 120px; margin-bottom: 20px;">
         <h1>El Shuk de Mauro</h1>
-        <p>Productos Kosher frescos y tradicionales</p>
+        <p>Productos Kosher frescos y naturales para tu bienestar</p>
         <nav>
             <a href="#inicio" onclick="scrollToSection('inicio')">Inicio</a>
-            <a href="#sobre" onclick="scrollToSection('sobre')">Sobre nosotros</a>
             <a href="#productos" onclick="scrollToSection('productos')">Productos</a>
+            <a href="#sobre" onclick="scrollToSection('sobre')">Sobre nosotros</a>
             <a href="#contacto" onclick="scrollToSection('contacto')">Contacto</a>
-            <a href="#redes" onclick="scrollToSection('redes')">Redes sociales</a>
         </nav>
     </header>
 
@@ -167,16 +169,16 @@
         <button onclick="vaciarCarrito()">Vaciar Carrito</button>
     </div>
 
-    <section id="sobre">
-        <h2>Sobre nosotros</h2>
-        <p id="sobre-texto">Cargando...</p>
-    </section>
-
     <section id="productos">
         <h2>Productos</h2>
         <div class="productos" id="productos-lista">
             <!-- Los productos se cargan dinámicamente desde Google Sheets -->
         </div>
+    </section>
+
+    <section id="sobre">
+        <h2>Sobre nosotros</h2>
+        <p>En El Shuk de Mauro, nos dedicamos a ofrecer productos Kosher de alta calidad, respetando las tradiciones ancestrales. Nuestra misión es proporcionar alimentos frescos, naturales y certificados Kosher, promoviendo un estilo de vida saludable y conectado con la naturaleza.</p>
     </section>
 
     <section id="contacto">
@@ -187,20 +189,13 @@
             <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
             <button type="submit">Enviar</button>
         </form>
-        <p id="contacto-info">Cargando...</p>
-        <h3>Nuestra Ubicación</h3>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.419415484681!3d37.774929779759!2m3!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b5b3b3b3%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1633020000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
-    </section>
-
-    <section id="redes">
-        <h2>Redes sociales</h2>
-        <p>Síguenos en:</p>
-        <div class="redes" id="redes-lista">
-            <!-- Los enlaces se cargan dinámicamente -->
-        </div>
+        <p>Dirección: [Tu dirección aquí] | Teléfono: [Tu teléfono aquí]</p>
     </section>
 
     <footer>
+        <div class="redes" id="redes-lista">
+            <!-- Los enlaces se cargan dinámicamente -->
+        </div>
         <p>&copy; 2023 El Shuk de Mauro. Todos los derechos reservados.</p>
     </footer>
 
@@ -235,24 +230,14 @@
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);
             if (section) {
-                section.style.display = 'block'; // Mostrar la sección si está oculta
                 section.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        // Cargar contenido desde Google Sheets
+        // Cargar productos desde Google Sheets
         const SPREADSHEET_ID = '12ExA7NgqPKauNdTAQpmSzV9AjzfKPbTeIoaFPN2gDwg';
         const API_KEY = '0a05c2cbcb44e8efaad71f59d2a0403d8c48bb7f';
 
-        // Cargar "Sobre nosotros"
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Sobre%20nosotros!A:A?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('sobre-texto').textContent = data.values ? data.values.slice(1).map(row => row[0]).join(' ') : 'Texto por defecto';
-            })
-            .catch(error => console.error('Error cargando Sobre nosotros:', error));
-
-        // Cargar "Productos"
         fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Productos!A:D?key=${API_KEY}`)
             .then(response => response.json())
             .then(data => {
@@ -262,7 +247,7 @@
                     const productoDiv = document.createElement('div');
                     productoDiv.className = 'producto';
                     productoDiv.innerHTML = `
-                        <img src="${imagen || 'https://via.placeholder.com/300x200?text=Producto'}" alt="${nombre}">
+                        <img src="${imagen || 'https://via.placeholder.com/350x250?text=Producto'}" alt="${nombre}">
                         <h3>${nombre}</h3>
                         <p>${descripcion}</p>
                         <p>Precio: $${precio}</p>
@@ -273,15 +258,7 @@
             })
             .catch(error => console.error('Error cargando Productos:', error));
 
-        // Cargar "Contacto"
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Contacto!A:A?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('contacto-info').textContent = data.values ? data.values.slice(1).map(row => row[0]).join(' ') : 'Dirección: [Tu dirección aquí] | Teléfono: [Tu teléfono aquí]';
-            })
-            .catch(error => console.error('Error cargando Contacto:', error));
-
-        // Cargar "Redes sociales"
+        // Cargar Redes sociales
         fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Redes%20sociales!A:B?key=${API_KEY}`)
             .then(response => response.json())
             .then(data => {
