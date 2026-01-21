@@ -203,8 +203,15 @@
 
     <section id="productos">
         <h2>Productos</h2>
-        <div class="productos" id="productos-lista">
-            <!-- Los productos se cargan dinámicamente desde Google Sheets -->
+        <div class="productos">
+            <!-- Agrega aquí los productos exactos del Google Sheet -->
+            <!-- Ejemplo: <div class="producto">
+                <img src="URL_IMAGEN" alt="NOMBRE">
+                <h3>NOMBRE</h3>
+                <p>DESCRIPCION</p>
+                <p>Precio: $PRECIO</p>
+                <button onclick="agregarAlCarrito('NOMBRE', PRECIO)">Agregar al Carrito</button>
+            </div> -->
         </div>
     </section>
 
@@ -225,8 +232,10 @@
     </section>
 
     <footer>
-        <div class="redes" id="redes-lista">
-            <!-- Los enlaces se cargan dinámicamente -->
+        <div class="redes">
+            <a href="https://facebook.com/tu-pagina">Facebook</a>
+            <a href="https://instagram.com/tu-cuenta">Instagram</a>
+            <a href="https://twitter.com/tu-cuenta">Twitter</a>
         </div>
         <p>&copy; 2023 El Shuk de Mauro. Todos los derechos reservados.</p>
     </footer>
@@ -265,45 +274,6 @@
                 section.scrollIntoView({ behavior: 'smooth' });
             }
         }
-
-        // Cargar productos desde Google Sheets
-        const SPREADSHEET_ID = '12ExA7NgqPKauNdTAQpmSzV9AjzfKPbTeIoaFPN2gDwg';
-        const API_KEY = '0a05c2cbcb44e8efaad71f59d2a0403d8c48bb7f';
-
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Productos!A:D?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                const productosLista = document.getElementById('productos-lista');
-                data.values.slice(1).forEach(row => {
-                    const [nombre, descripcion, precio, imagen] = row;
-                    const productoDiv = document.createElement('div');
-                    productoDiv.className = 'producto';
-                    productoDiv.innerHTML = `
-                        <img src="${imagen || 'https://via.placeholder.com/350x250?text=Producto+Lindo'}" alt="${nombre}">
-                        <h3>${nombre}</h3>
-                        <p>${descripcion}</p>
-                        <p>Precio: $${precio}</p>
-                        <button onclick="agregarAlCarrito('${nombre}', ${precio})">Agregar al Carrito</button>
-                    `;
-                    productosLista.appendChild(productoDiv);
-                });
-            })
-            .catch(error => console.error('Error cargando Productos:', error));
-
-        // Cargar Redes sociales
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Redes%20sociales!A:B?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                const redesLista = document.getElementById('redes-lista');
-                data.values.slice(1).forEach(row => {
-                    const [plataforma, url] = row;
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.textContent = plataforma;
-                    redesLista.appendChild(a);
-                });
-            })
-            .catch(error => console.error('Error cargando Redes sociales:', error));
     </script>
 </body>
 </html>
