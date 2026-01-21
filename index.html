@@ -169,25 +169,46 @@
 
     <section id="sobre">
         <h2>Sobre nosotros</h2>
-        <p id="sobre-texto">Cargando...</p>
+        <p>En El Shuk de Mauro, nos dedicamos a ofrecer productos Kosher de alta calidad, respetando las tradiciones ancestrales. Nuestra misión es proporcionar alimentos frescos, naturales y certificados Kosher, promoviendo un estilo de vida saludable y conectado con la naturaleza.</p>
     </section>
 
     <section id="productos">
         <h2>Productos</h2>
-        <div class="productos" id="productos-lista">
-            <!-- Los productos se cargan dinámicamente -->
+        <div class="productos">
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Vino+Kosher" alt="Vino Kosher">
+                <h3>Vino Kosher</h3>
+                <p>Vino certificado Kosher, elaborado con uvas seleccionadas para ocasiones especiales.</p>
+                <p>Precio: $15.99</p>
+                <button onclick="agregarAlCarrito('Vino Kosher', 15.99)">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Pan+de+Matza" alt="Pan de Matzá">
+                <h3>Pan de Matzá</h3>
+                <p>Pan tradicional Kosher, perfecto para la Pascua y comidas diarias.</p>
+                <p>Precio: $5.99</p>
+                <button onclick="agregarAlCarrito('Pan de Matzá', 5.99)">Agregar al Carrito</button>
+            </div>
+            <div class="producto">
+                <img src="https://via.placeholder.com/300x200?text=Aceite+de+Oliva+Kosher" alt="Aceite de Oliva Kosher">
+                <h3>Aceite de Oliva Kosher</h3>
+                <p>Aceite puro extraído de olivas frescas, certificado Kosher.</p>
+                <p>Precio: $12.99</p>
+                <button onclick="agregarAlCarrito('Aceite de Oliva Kosher', 12.99)">Agregar al Carrito</button>
+            </div>
+            <!-- Agrega más productos del sheet aquí si quieres -->
         </div>
     </section>
 
     <section id="contacto">
         <h2>Contacto</h2>
-        <form action="https://formspree.io/f/xxxxxxxx" method="POST"> <!-- Reemplaza con tu endpoint de Formspree para enviar a elshukdemauro@gmail.com -->
+        <form action="https://formspree.io/f/xxxxxxxx" method="POST"> <!-- Reemplaza con tu endpoint de Formspree -->
             <input type="text" name="nombre" placeholder="Tu nombre" required>
             <input type="email" name="email" placeholder="Tu email" required>
             <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
             <button type="submit">Enviar</button>
         </form>
-        <p id="contacto-info">Cargando...</p>
+        <p>Dirección: [Tu dirección aquí] | Teléfono: [Tu teléfono aquí]</p>
         <h3>Nuestra Ubicación</h3>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.419415484681!3d37.774929779759!2m3!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064b5b3b3b3%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1633020000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
     </section>
@@ -195,8 +216,10 @@
     <section id="redes">
         <h2>Redes sociales</h2>
         <p>Síguenos en:</p>
-        <div class="redes" id="redes-lista">
-            <!-- Los enlaces se cargan dinámicamente -->
+        <div class="redes">
+            <a href="https://facebook.com/tu-pagina">Facebook</a>
+            <a href="https://instagram.com/tu-cuenta">Instagram</a>
+            <a href="https://twitter.com/tu-cuenta">Twitter</a>
         </div>
     </section>
 
@@ -239,62 +262,6 @@
                 section.scrollIntoView({ behavior: 'smooth' });
             }
         }
-
-        // Cargar contenido desde Google Sheets
-        const SPREADSHEET_ID = '12ExA7NgqPKauNdTAQpmSzV9AjzfKPbTeIoaFPN2gDwg';
-        const API_KEY = '0a05c2cbcb44e8efaad71f59d2a0403d8c48bb7f';
-
-        // Cargar "Sobre nosotros"
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Sobre%20nosotros!A:A?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('sobre-texto').textContent = data.values ? data.values.slice(1).map(row => row[0]).join(' ') : 'Texto por defecto';
-            })
-            .catch(error => console.error('Error cargando Sobre nosotros:', error));
-
-        // Cargar "Productos"
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Productos!A:D?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                const productosLista = document.getElementById('productos-lista');
-                data.values.slice(1).forEach(row => {
-                    const [nombre, descripcion, precio, imagen] = row;
-                    const productoDiv = document.createElement('div');
-                    productoDiv.className = 'producto';
-                    productoDiv.innerHTML = `
-                        <img src="${imagen || 'https://via.placeholder.com/300x200?text=Producto'}" alt="${nombre}">
-                        <h3>${nombre}</h3>
-                        <p>${descripcion}</p>
-                        <p>Precio: $${precio}</p>
-                        <button onclick="agregarAlCarrito('${nombre}', ${precio})">Agregar al Carrito</button>
-                    `;
-                    productosLista.appendChild(productoDiv);
-                });
-            })
-            .catch(error => console.error('Error cargando Productos:', error));
-
-        // Cargar "Contacto"
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Contacto!A:A?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('contacto-info').textContent = data.values ? data.values.slice(1).map(row => row[0]).join(' ') : 'Dirección: [Tu dirección aquí] | Teléfono: [Tu teléfono aquí]';
-            })
-            .catch(error => console.error('Error cargando Contacto:', error));
-
-        // Cargar "Redes sociales"
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Redes%20sociales!A:B?key=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                const redesLista = document.getElementById('redes-lista');
-                data.values.slice(1).forEach(row => {
-                    const [plataforma, url] = row;
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.textContent = plataforma;
-                    redesLista.appendChild(a);
-                });
-            })
-            .catch(error => console.error('Error cargando Redes sociales:', error));
     </script>
 </body>
 </html>
